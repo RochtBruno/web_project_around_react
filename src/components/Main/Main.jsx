@@ -7,6 +7,28 @@ import Popup from './components/Popup/Popup.jsx';
 import EditAvatar from './components/Popup/components/EditAvatar/EditAvatar.jsx';
 import EditProfile from './components/Popup/components/EditProfile/EditProfile.jsx';
 import NewCard from './components/Popup/components/NewCard/NewCard.jsx';
+import Card from './components/Card/Card.jsx'
+
+const cards = [
+  {
+    isLiked: false,
+    _id: '5d1f0611d321eb4bdcd707dd',
+    name: 'Yosemite Valley',
+    link: 'https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg',
+    owner: '5d1f0611d321eb4bdcd707dd',
+    createdAt: '2019-07-05T08:10:57.741Z',
+  },
+  {
+    isLiked: false,
+    _id: '5d1f064ed321eb4bdcd707de',
+    name: 'Lake Louise',
+    link: 'https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg',
+    owner: '5d1f0611d321eb4bdcd707dd',
+    createdAt: '2019-07-05T08:11:58.324Z',
+  },
+];
+
+console.log(cards);
 
 function Main() {
   const [popup, setPopup] = useState(null);
@@ -24,7 +46,8 @@ function Main() {
   }
 
   return (
-    <section className="profile">
+    <>
+        <section className="profile">
       <div className="profile__image" onClick={() => handleOpenPopup(editAvatarPopup)}>
         <img src={profileImage} alt="foto de perfil" />
       </div>
@@ -50,6 +73,30 @@ function Main() {
         </>
       )}
     </section>
+      <section className="cards">
+      </section>
+      <div className="loading-spinner" id="loadingSpinner"></div>
+
+      <ul className="cards">
+        {cards.map((card) => (
+          <Card key={card._id} card={card} />
+        ))}
+      </ul>
+      <div className="popup popup_type_confirm">
+        <div className="popup__content">
+          <img className="popup__close popup__close_confirm" src="../images/close-modal.png" alt="botão de fechar modal" />
+          <h3 className="popup__title popup__title_confirm">Tem certeza?</h3>
+          <button type="button" className="popup__button popup__button_confirm">Sim</button>
+        </div>
+      </div>
+      <div className="popup popup_type_image" >
+        <div className="popup__content">
+          <img className="popup__image" src="" alt="Imagem Ampliada" />
+          <p className="popup__caption"></p>
+          <img src="../images/close-modal.png" className="popup__close" alt="Fechar " />
+        </div>
+      </div>
+    </>
   );
 }
 

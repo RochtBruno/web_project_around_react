@@ -7,6 +7,7 @@ import Popup from './components/Popup/Popup.jsx';
 import EditAvatar from './components/Popup/components/EditAvatar/EditAvatar.jsx';
 import EditProfile from './components/Popup/components/EditProfile/EditProfile.jsx';
 import NewCard from './components/Popup/components/NewCard/NewCard.jsx';
+import DeleteCard from './components/Popup/components/DeleteCard/DeleteCard.jsx';
 import Card from './components/Card/Card.jsx'
 
 const cards = [
@@ -32,10 +33,30 @@ console.log(cards);
 
 function Main() {
   const [popup, setPopup] = useState(null);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   const editProfilePopup = { title: 'Editar perfil', children: <EditProfile /> };
   const editAvatarPopup = { title: 'Atualizar a foto do perfil', children: <EditAvatar /> };
   const newCardPopup = { title: 'Novo local', children: <NewCard /> };
+
+  const deleteCardPopup = (card) => {
+    setSelectedCard(card);
+    setPopup({
+      title: '',
+      children: (
+        <DeleteCard
+          onClose={handleClosePopup}
+          onConfirm={() => handleDeleteCard(card)}
+        />
+      ),
+    });
+  };
+
+  function handleDeleteCard(card) {
+    console.log('Card deletado:', card);
+    setPopup(null);
+    setSelectedCard(null);
+  }
 
   function handleOpenPopup(popup) {
     setPopup(popup);
@@ -52,8 +73,8 @@ function Main() {
         <img src={profileImage} alt="foto de perfil" />
       </div>
       <div className="profile__infos">
-        <h2 className="profile__infos-title">Seu Nome</h2>
-        <p className="profile__infos-description">Sua descrição</p>
+        <h2 className="profile__infos-title">Jacques Costeau</h2>
+        <p className="profile__infos-description">Explorador</p>
         <div className="profile__infos-edit" onClick={() => handleOpenPopup(editProfilePopup)}>
           <img src={editProfile} alt="botão de editar perfil" />
         </div>
@@ -73,22 +94,12 @@ function Main() {
         </>
       )}
     </section>
-      <section className="cards">
-      </section>
       <div className="loading-spinner" id="loadingSpinner"></div>
-
       <ul className="cards">
         {cards.map((card) => (
-          <Card key={card._id} card={card} />
+          <Card key={card._id} card={card} onDelete={deleteCardPopup} />
         ))}
       </ul>
-      <div className="popup popup_type_confirm">
-        <div className="popup__content">
-          <img className="popup__close popup__close_confirm" src="../images/close-modal.png" alt="botão de fechar modal" />
-          <h3 className="popup__title popup__title_confirm">Tem certeza?</h3>
-          <button type="button" className="popup__button popup__button_confirm">Sim</button>
-        </div>
-      </div>
       <div className="popup popup_type_image" >
         <div className="popup__content">
           <img className="popup__image" src="" alt="Imagem Ampliada" />

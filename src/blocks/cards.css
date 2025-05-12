@@ -70,17 +70,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    z-index: 0;
 }
 
-.popup__content {
+/* .popup__content {
     position: relative;
 }
 
 .popup__content img {
     max-width: 80vw;
     max-height: 70vh;
-}
+} */
 
 .popup__description{
 	font-family: "Inter";
@@ -90,7 +90,7 @@
 	color: #ffffff;
 }
 
-.popup__close {
+/* .popup__close {
     position: absolute;
     top: -50px;
     right: -25px;
@@ -103,10 +103,10 @@
 
 .popup__close:hover{
 	opacity: 0.6;
-}
+} */
 
 
-.popup_type_confirm .popup__content {
+/* .popup_type_confirm .popup__content {
 	background-color: #ffffff;
 	width: 90%;
 	max-width: 430px;
@@ -142,7 +142,7 @@
 	top: -40px;
 	right: -40px;
 	cursor: pointer;
-}
+} */
 
 .loading-spinner {
 	display: none; /* Oculto por padrão */

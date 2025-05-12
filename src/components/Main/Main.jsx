@@ -42,9 +42,12 @@ function Main() {
       </div>
 
       {popup && (
-        <Popup onClose={handleClosePopup} title={popup.title}>
-          {popup.children}
-        </Popup>
+        <>
+          <div className="popup__overlay" onClick={handleClosePopup}></div>
+          <Popup onClose={handleClosePopup} title={popup.title}>
+            {popup.children}
+          </Popup>
+        </>
       )}
     </section>
   );

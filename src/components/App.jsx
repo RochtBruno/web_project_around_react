@@ -31,19 +31,19 @@ function App() {
             </div>
             </template>
             <div className="popup popup_type_confirm">
-            <div className="popup__content">
-              <img className="popup__close popup__close_confirm" src="../images/close-modal.png" alt="botão de fechar modal" />
-              <h3 className="popup__title popup__title_confirm">Tem certeza?</h3>
-              <button type="button" className="popup__button popup__button_confirm">Sim</button>
-            </div>
+              <div className="popup__content">
+                <img className="popup__close popup__close_confirm" src="../images/close-modal.png" alt="botão de fechar modal" />
+                <h3 className="popup__title popup__title_confirm">Tem certeza?</h3>
+                <button type="button" className="popup__button popup__button_confirm">Sim</button>
+              </div>
             </div>
             <div className="popup popup_type_image" >
-            <div className="popup__content">
-              <img className="popup__image" src="" alt="Imagem Ampliada" />
-              <p className="popup__caption"></p>
-              <img src="../images/close-modal.png" className="popup__close" alt="Fechar " />
+              <div className="popup__content">
+                <img className="popup__image" src="" alt="Imagem Ampliada" />
+                <p className="popup__caption"></p>
+                <img src="../images/close-modal.png" className="popup__close" alt="Fechar " />
+              </div>
             </div>
-          </div>
           <Footer />
         </div>
   )

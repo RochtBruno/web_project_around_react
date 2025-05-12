@@ -5,9 +5,9 @@ function Popup(props) {
 
   return (
     <div className="popup opened">
-      <div className="popup__content">
+      <div className={`popup__content ${!title ? "popup__content_content_image" : ""}`}>
           <img className="popup__close" src={closeModal} alt="botão de fechar modal" onClick={onClose}/>
-        <h2 className="popup__title">{title}</h2>
+        {title && <h2 className="popup__title">{title}</h2>}
         {children}
       </div>
     </div>

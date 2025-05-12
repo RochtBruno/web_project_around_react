@@ -97,7 +97,12 @@ function Main() {
       <div className="loading-spinner" id="loadingSpinner"></div>
       <ul className="cards">
         {cards.map((card) => (
-          <Card key={card._id} card={card} onDelete={deleteCardPopup} />
+          <Card
+            key={card._id}
+            card={card}
+            onDelete={deleteCardPopup}
+            handleOpenPopup={handleOpenPopup}
+          />
         ))}
       </ul>
       <div className="popup popup_type_image" >

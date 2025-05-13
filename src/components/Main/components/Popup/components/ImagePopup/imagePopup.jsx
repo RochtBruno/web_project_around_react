@@ -1,16 +1,9 @@
-import closeModal from '../../../../../../images/close-modal.png';
 
-function ImagePopup({ card, onClose }) {
+function ImagePopup({card}) {
     if (!card) return null;
 
     return (
         <>
-            <img
-                className="popup__close"
-                src={closeModal}
-                alt="Fechar"
-                onClick={onClose}
-            />
             <img
                 className="popup__image"
                 src={card.link}

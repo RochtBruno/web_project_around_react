@@ -1,10 +1,9 @@
-import React from 'react';
-import deleteCard from '../../../../images/Trash.svg';
-import likeButton from '../../../../images/Group.svg';
-import ImagePopup from '../Popup/components/ImagePopup/imagePopup.jsx';
+import deleteCard from '../../images/Trash.svg';
+import likeButton from '../../images/Group.svg';
+import ImagePopup from '../ImagePopup/imagePopup';
 
 function Card(props) {
-  const { name, link, likes } = props.card;
+  const { name, link } = props.card;
 
   const handleDelete = () => {
     if (props.onDelete) {

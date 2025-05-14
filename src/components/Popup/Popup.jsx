@@ -1,4 +1,4 @@
-import closeModal from '../../../../images/close-modal.png';
+import closeModal from '../../images/close-modal.png';
 
 function Popup(props) {
   const { title, children, onClose } = props;

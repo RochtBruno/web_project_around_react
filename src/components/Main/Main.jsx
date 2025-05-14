@@ -3,12 +3,12 @@ import { useState } from 'react';
 import editProfile from '../../images/edit.png';
 import imageAddCard from '../../images/add.png';
 import profileImage from '../../images/profile_image.jpg';
-import Popup from './components/Popup/Popup.jsx';
-import EditAvatar from './components/Popup/components/EditAvatar/EditAvatar.jsx';
-import EditProfile from './components/Popup/components/EditProfile/EditProfile.jsx';
-import NewCard from './components/Popup/components/NewCard/NewCard.jsx';
-import DeleteCard from './components/Popup/components/DeleteCard/DeleteCard.jsx';
-import Card from './components/Card/Card.jsx'
+import Popup from '../Popup/Popup.jsx';
+import EditAvatar from '../EditAvatar/EditAvatar.jsx';
+import EditProfile from '../EditProfile/EditProfile.jsx';
+import NewCard from '../NewCard/NewCard.jsx';
+import DeleteCard from '../DeleteCard/DeleteCard.jsx';
+import Card from '../Card/Card.jsx'
 
 const cards = [
   {
@@ -29,20 +29,16 @@ const cards = [
   },
 ];
 
-console.log(cards);
-
 function Main() {
   const [popup, setPopup] = useState(null);
-  const [selectedCard, setSelectedCard] = useState(null);
 
   const editProfilePopup = { title: 'Editar perfil', children: <EditProfile /> };
   const editAvatarPopup = { title: 'Atualizar a foto do perfil', children: <EditAvatar /> };
   const newCardPopup = { title: 'Novo local', children: <NewCard /> };
 
   const deleteCardPopup = (card) => {
-    setSelectedCard(card);
     setPopup({
-      title: '',
+      title: 'Excluir imagem?',
       children: (
         <DeleteCard
           onClose={handleClosePopup}
@@ -53,9 +49,7 @@ function Main() {
   };
 
   function handleDeleteCard(card) {
-    console.log('Card deletado:', card);
     setPopup(null);
-    setSelectedCard(null);
   }
 
   function handleOpenPopup(popup) {

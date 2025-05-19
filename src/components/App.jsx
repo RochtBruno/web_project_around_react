@@ -5,13 +5,13 @@ import Main from './Main/Main.jsx'
 
 function App() {
 
-  return (
-    <div className="page">
-      <Header />
-      <Main />
-      <Footer />
-    </div>
-  )
+	return (
+		<div className="page">
+			<Header />
+			<Main />
+			<Footer />
+		</div>
+	)
 }
 
 export default App

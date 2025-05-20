@@ -60,13 +60,21 @@ function Main() {
     });
   };
 
-  function handleLike(card) {
-    setCards((prevCards) =>
-      prevCards.map((c) =>
-        c._id === card._id ? { ...c, isLiked: !c.isLiked } : c
-      )
-    );
-  }
+function handleLike(card) {
+  const likeRequest = card.isLiked ? api.removeLike(card._id) : api.addLike(card._id);
+
+  likeRequest
+    .then((updatedCard) => {
+      setCards((prevCards) =>
+        prevCards.map((c) =>
+          c._id === card._id ? { ...c, ...updatedCard, isLiked: !card.isLiked } : c
+        )
+      );
+    })
+    .catch((err) => {
+      console.error('Erro ao atualizar like:', err);
+    });
+}
 
   function handleDeleteCard(card) {
     setPopup(null);

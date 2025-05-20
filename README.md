@@ -16,34 +16,6 @@ Projeto desenvolvido como parte do curso TripleTen, utilizando React para criar 
 - CSS Modules
 - Vite
 
-## Estrutura do Projeto
-```
-├── public/
-├── src/
-│   ├── assets/
-│   ├── blocks/         # Arquivos CSS
-│   ├── components/     # Componentes React
-│   │   ├── App.jsx
-│   │   ├── Header/
-│   │   ├── Footer/
-│   │   └── Main/
-│   │       ├── Main.jsx
-│   │       └── components/
-│   │           ├── Card/
-│   │           └── Popup/
-│   │               └── components/
-│   │                   ├── DeleteCard/
-│   │                   ├── EditAvatar/
-│   │                   ├── EditProfile/
-│   │                   ├── ImagePopup/
-│   │                   └── NewCard/
-│   └── index.css
-├── index.html
-├── package.json
-├── vite.config.js
-└── README.md
-```
-
 ## Como rodar o projeto
 
 1. Instale as dependências:
@@ -65,4 +37,4 @@ Projeto desenvolvido como parte do curso TripleTen, utilizando React para criar 
 - Imagens e layout baseados no projeto do curso TripleTen.
 
 ---
-Desenvolvido por [Seu Nome].
+Desenvolvido por Bruno Rocha.

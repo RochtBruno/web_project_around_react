@@ -60,6 +60,14 @@ function Main() {
     });
   };
 
+  function handleLike(card) {
+    setCards((prevCards) =>
+      prevCards.map((c) =>
+        c._id === card._id ? { ...c, isLiked: !c.isLiked } : c
+      )
+    );
+  }
+
   function handleDeleteCard(card) {
     setPopup(null);
   }
@@ -108,6 +116,7 @@ function Main() {
             card={card}
             onDelete={deleteCardPopup}
             handleOpenPopup={handleOpenPopup}
+            onLike={() => handleLike(card)}
           />
         ))}
       </ul>

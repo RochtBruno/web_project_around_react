@@ -1,9 +1,14 @@
 import deleteCard from '../../images/Trash.svg';
-import likeButton from '../../images/Group.svg';
+import likeIcon from '../../images/Group.svg';
+import likeActiveIcon from  '../../images/Union.svg'
 import ImagePopup from '../ImagePopup/imagePopup';
 
 function Card(props) {
-  const { name, link } = props.card;
+  const { name, link, isLiked } = props.card;
+
+  // const cardLikeButtonClassName = `card__like-button ${
+  //   isLiked ? 'card__like-button_is-active' : ''
+  // }`;
 
   const handleDelete = () => {
     if (props.onDelete) {
@@ -36,7 +41,7 @@ function Card(props) {
       </div>
       <div className="cards__card-infos">
         <h2 className="cards__card-title">{name}</h2>
-        <img className="cards__card-like" src={likeButton} alt="Curtir" />
+        <img className="cards__card-like" src={isLiked ? likeActiveIcon : likeIcon} alt="Curtir" onClick={props.onLike}/>
       </div>
     </div>
   );

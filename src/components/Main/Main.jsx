@@ -1,8 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
-
 import editProfile from '../../images/edit.png';
 import imageAddCard from '../../images/add.png';
-// import profileImage from '../../images/profile_image.jpg';
 import Popup from '../Popup/Popup.jsx';
 import EditAvatar from '../EditAvatar/EditAvatar.jsx';
 import EditProfile from '../EditProfile/EditProfile.jsx';
@@ -11,25 +9,6 @@ import DeleteCard from '../DeleteCard/DeleteCard.jsx';
 import Card from '../Card/Card.jsx'
 import CurrentUserContext from '../../contexts/CurrentUserContext.js'
 import api from '../../utils/api.js'
-
-// const cards = [
-//   {
-//     isLiked: false,
-//     _id: '5d1f0611d321eb4bdcd707dd',
-//     name: 'Yosemite Valley',
-//     link: 'https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg',
-//     owner: '5d1f0611d321eb4bdcd707dd',
-//     createdAt: '2019-07-05T08:10:57.741Z',
-//   },
-//   {
-//     isLiked: false,
-//     _id: '5d1f064ed321eb4bdcd707de',
-//     name: 'Lake Louise',
-//     link: 'https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg',
-//     owner: '5d1f0611d321eb4bdcd707dd',
-//     createdAt: '2019-07-05T08:11:58.324Z',
-//   },
-// ];
 
 function Main() {
   const [popup, setPopup] = useState(null);
@@ -128,13 +107,6 @@ function handleLike(card) {
           />
         ))}
       </ul>
-      {/* <div className="popup popup_type_image" >
-        <div className="popup__content">
-          <img className="popup__image" src="" alt="Imagem Ampliada" />
-          <p className="popup__caption"></p>
-          <img src="../images/close-modal.png" className="popup__close" alt="Fechar " />
-        </div>
-      </div> */}
     </>
   );
 }

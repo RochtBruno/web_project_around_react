@@ -2,7 +2,8 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 50px;
-  gap: 15px;
+  gap: 17px;
+  padding: 0;
 }
 
 .cards__card {

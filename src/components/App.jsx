@@ -25,9 +25,16 @@ function App() {
 		})
 	}
 
+	const handleUpdateAvatar = (avatarUrl) => {
+		api.updateAvatar(avatarUrl)
+		.then((res) => res.json())
+		.then(userData => setCurrentUser(userData))
+		.catch(err => console.log("Erro ao mudar avatar",err))
+	}
+
 	return (
 		<div className="page">
-			<CurrentUserContext.Provider value={{currentUser,handleUpdateUser}}>
+			<CurrentUserContext.Provider value={{currentUser,handleUpdateUser, handleUpdateAvatar}}>
 				<Header />
 				<Main />
 				<Footer />

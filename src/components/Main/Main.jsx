@@ -25,7 +25,7 @@ function Main() {
   },[])
 
   const editProfilePopup = { title: 'Editar perfil', children: <EditProfile onClose={handleClosePopup}/> };
-  const editAvatarPopup = { title: 'Atualizar a foto do perfil', children: <EditAvatar /> };
+  const editAvatarPopup = { title: 'Atualizar a foto do perfil', children: <EditAvatar onClose={handleClosePopup} /> };
   const newCardPopup = { title: 'Novo local', children: <NewCard /> };
 
   const deleteCardPopup = (card) => {

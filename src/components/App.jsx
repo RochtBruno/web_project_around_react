@@ -14,9 +14,19 @@ function App() {
 		.then((data) => setCurrentUser(data))
 	},[])
 
+	const handleUpdateUser = (name,about) => {
+		api.updateUser(name,about)
+		.then((userData) => {
+			setCurrentUser(userData)
+		})
+		.catch((err)=>{
+			console.log("Erro ao atualizar usuário".err)
+		})
+	}
+
 	return (
 		<div className="page">
-			<CurrentUserContext.Provider value={currentUser}>
+			<CurrentUserContext.Provider value={{currentUser,handleUpdateUser}}>
 				<Header />
 				<Main />
 				<Footer />

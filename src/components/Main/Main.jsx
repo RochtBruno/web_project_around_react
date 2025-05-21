@@ -9,12 +9,13 @@ import DeleteCard from '../DeleteCard/DeleteCard.jsx';
 import Card from '../Card/Card.jsx'
 import CurrentUserContext from '../../contexts/CurrentUserContext.js'
 import api from '../../utils/api.js'
+// import { preview } from 'vite';
 
 function Main() {
   const [popup, setPopup] = useState(null);
   const [cards, setCards] = useState([]);
 
-  const currentUser = useContext(CurrentUserContext)
+  const {currentUser} = useContext(CurrentUserContext)
 
   useEffect(() => {
       api.getInitialCards()
@@ -56,7 +57,15 @@ function handleLike(card) {
 }
 
   function handleDeleteCard(card) {
-    setPopup(null);
+    api.deleteCard(card._id)
+    .then(() => {
+      setCards((prevCards) => prevCards.filter((c) => c._id !== card._id));
+      setPopup(null)
+    })
+    .catch((err) => {
+      console.log("Erro ao deletar card", err)
+      setPopup(null)
+    })
   }
 
   function handleOpenPopup(popup) {
@@ -74,8 +83,8 @@ function handleLike(card) {
         <img src={currentUser.avatar} alt="foto de perfil" />
       </div>
       <div className="profile__infos">
-        <h2 className="profile__infos-title">{currentUser.name}</h2>
-        <p className="profile__infos-description">{currentUser.about}</p>
+        <h2 className="profile__infos-title">{currentUser.name || ""}</h2>
+        <p className="profile__infos-description">{currentUser.about || ""}</p>
         <div className="profile__infos-edit" onClick={() => handleOpenPopup(editProfilePopup)}>
           <img src={editProfile} alt="botão de editar perfil" />
         </div>

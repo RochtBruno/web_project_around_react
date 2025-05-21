@@ -1,7 +1,7 @@
-function DeleteCard(){
+function DeleteCard({onConfirm}){
     return(
         <>
-            <button type="button" className="popup__btn">Sim</button>
+            <button type="button" className="popup__btn" onClick={onConfirm}>Sim</button>
         </>
     )
 }

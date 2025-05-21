@@ -24,7 +24,7 @@ function Main() {
       .catch((err) => console.log("Erro ao buscar cards-> ", err))
   },[])
 
-  const editProfilePopup = { title: 'Editar perfil', children: <EditProfile /> };
+  const editProfilePopup = { title: 'Editar perfil', children: <EditProfile onClose={handleClosePopup}/> };
   const editAvatarPopup = { title: 'Atualizar a foto do perfil', children: <EditAvatar /> };
   const newCardPopup = { title: 'Novo local', children: <NewCard /> };
 

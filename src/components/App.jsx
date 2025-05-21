@@ -16,11 +16,12 @@ function App() {
 
 	const handleUpdateUser = (name,about) => {
 		api.updateUser(name,about)
+		.then((res) => res.json())
 		.then((userData) => {
 			setCurrentUser(userData)
 		})
 		.catch((err)=>{
-			console.log("Erro ao atualizar usuário".err)
+			console.log("Erro ao atualizar usuário",err)
 		})
 	}
 

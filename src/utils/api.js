@@ -53,22 +53,20 @@ class Api {
 	}
 
 	addLike(cardId) {
-	  console.log(`Enviando solicitação PUT para curtir o cartão com ID: ${cardId}`);
 	  return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
 		method: "PUT",
 		headers: this._headers,
 	  })
 		.then((res) => {
-		  console.log(`Resposta da API para curtir o cartão com ID: ${cardId}`, res);
 		  if (!res.ok) {
 			return Promise.reject(`Erro ao curtir o cartão: ${res.status}`);
 		  }
 		  return res.json();
 		})
 		.then((data) => {
-		  console.log(`Dados retornados pela API após curtir o cartão com ID: ${cardId}`, data);
 		  return data;
-		});
+		})
+		.catch(err => console.log("Erro ao curtir card: ",err));
 	}
 
 	removeLike(cardId) {
@@ -77,16 +75,15 @@ class Api {
 		headers: this._headers,
 	  })
 		.then((res) => {
-		  console.log(`Resposta da API para remover curtida do cartão com ID: ${cardId}`, res);
 		  if (!res.ok) {
 			return Promise.reject(`Erro ao remover a curtida: ${res.status}`);
 		  }
 		  return res.json();
 		})
 		.then((data) => {
-		  console.log(`Dados retornados pela API após remover curtida do cartão com ID: ${cardId}`, data);
 		  return data;
-		});
+		})
+		.catch(err => console.log("Erro ao descutir card: ",err));
 	}
   }
 

@@ -16,13 +16,14 @@ function Main({
   onCardDelete,
   popupState,
   setPopupState,
-  onAddPlaceSubmit
+  onAddPlaceSubmit,
+  isLoading
 }) {
 
   const {currentUser} = useContext(CurrentUserContext)
 
   useEffect(() => {
-      getCardList()
+	  getCardList()
   },[])
 
   const editProfilePopup = { title: 'Editar perfil', children: <EditProfile onClose={handleClosePopup}/> };
@@ -30,66 +31,66 @@ function Main({
   const newCardPopup = { title: 'Novo local', children: <NewCard onAddPlaceSubmit={onAddPlaceSubmit} onClose={handleClosePopup}/> };
 
   const deleteCardPopup = (cardState) => {
-    setPopupState({
-      title: 'Excluir imagem?',
-      children: (
-        <DeleteCard
-          onClose={handleClosePopup}
-          onConfirm={() => onCardDelete(cardState)}
-        />
-      ),
-    });
+	setPopupState({
+	  title: 'Excluir imagem?',
+	  children: (
+		<DeleteCard
+		  onClose={handleClosePopup}
+		  onConfirm={() => onCardDelete(cardState)}
+		/>
+	  ),
+	});
   };
 
   function handleOpenPopup(popupState) {
-    setPopupState(popupState);
+	setPopupState(popupState);
   }
 
   function handleClosePopup() {
-    setPopupState(null);
+	setPopupState(null);
   }
 
   return (
-    <>
-        <section className="profile">
-      <div className="profile__image" onClick={() => handleOpenPopup(editAvatarPopup)}>
-        <img src={currentUser.avatar} alt="foto de perfil" />
-      </div>
-      <div className="profile__infos">
-        <h2 className="profile__infos-title">{currentUser.name || ""}</h2>
-        <p className="profile__infos-description">{currentUser.about || ""}</p>
-        <div className="profile__infos-edit" onClick={() => handleOpenPopup(editProfilePopup)}>
-          <img src={editProfile} alt="botão de editar perfil" />
-        </div>
-      </div>
-      <div className="profile__button" onClick={() => handleOpenPopup(newCardPopup)}>
-        <div className="profile__button-rectangle">
-          <img src={imageAddCard} alt="botão de adicionar card" />
-        </div>
-      </div>
+	<>
+		<section className="profile">
+	  <div className="profile__image" onClick={() => handleOpenPopup(editAvatarPopup)}>
+		<img src={currentUser.avatar} alt="foto de perfil" />
+	  </div>
+	  <div className="profile__infos">
+		<h2 className="profile__infos-title">{currentUser.name || ""}</h2>
+		<p className="profile__infos-description">{currentUser.about || ""}</p>
+		<div className="profile__infos-edit" onClick={() => handleOpenPopup(editProfilePopup)}>
+		  <img src={editProfile} alt="botão de editar perfil" />
+		</div>
+	  </div>
+	  <div className="profile__button" onClick={() => handleOpenPopup(newCardPopup)}>
+		<div className="profile__button-rectangle">
+		  <img src={imageAddCard} alt="botão de adicionar card" />
+		</div>
+	  </div>
 
-      {popupState && (
-        <>
-          <div className="popup__overlay" onClick={handleClosePopup}></div>
-          <Popup onClose={handleClosePopup} title={popupState.title}>
-            {popupState.children}
-          </Popup>
-        </>
-      )}
-    </section>
-      <div className="loading-spinner" id="loadingSpinner"></div>
-      <ul className="cards">
-        {cardState.map((card) => (
-          <Card
-            key={card._id}
-            card={card}
-            onDelete={deleteCardPopup}
-            handleOpenPopup={handleOpenPopup}
-            onLike={() => onCardLike(card)}
-          />
-        ))}
-      </ul>
-    </>
+	  {popupState && (
+		<>
+		  <div className="popup__overlay" onClick={handleClosePopup}></div>
+		  <Popup onClose={handleClosePopup} title={popupState.title}>
+			{popupState.children}
+		  </Popup>
+		</>
+	  )}
+	</section>
+	  {isLoading && <div className="loading-spinner" id="loadingSpinner"></div>}
+	  <ul className="cards">
+		{cardState.map((card) => (
+		  <Card
+			key={card._id}
+			card={card}
+			onDelete={deleteCardPopup}
+			handleOpenPopup={handleOpenPopup}
+			onLike={() => onCardLike(card)}
+		  />
+		))}
+	  </ul>
+	</>
   );
 }
 

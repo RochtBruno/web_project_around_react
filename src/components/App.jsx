@@ -9,6 +9,7 @@ function App() {
 	const [currentUser, setCurrentUser] = useState({})
 	const [card, setCard] = useState([])
 	const [popup, setPopup] = useState(null);
+	const [isLoading, setLoading] = useState(false)
 
 	useEffect(() => {
 		api.getUser()
@@ -17,6 +18,7 @@ function App() {
 	},[])
 
 	const handleUpdateUser = (name,about) => {
+		setLoading(true)
 		api.updateUser(name,about)
 		.then((res) => res.json())
 		.then((userData) => {
@@ -25,27 +27,34 @@ function App() {
 		.catch((err)=>{
 			console.log("Erro ao atualizar usuário",err)
 		})
+		.finally(() => setLoading(false))
 	}
 
 	const handleUpdateAvatar = (avatarUrl) => {
+		setLoading(true)
 		api.updateAvatar(avatarUrl)
 		.then((res) => res.json())
 		.then(userData => setCurrentUser(userData))
 		.catch(err => console.log("Erro ao mudar avatar",err))
+		.finally(() => setLoading(false))
 	}
 
 	const getCardList = () => {
+		setLoading(true)
 		api.getInitialCards()
 			.then((res) => res.json())
 			.then((data) => setCard(data))
 			.catch((err) => console.log("Erro ao buscar cards-> ", err))
+		.finally(() => setLoading(false))
 	}
 
 	const handleAddPlaceSubmit = (card) => {
+		setLoading(true)
 		api.createCard(card)
 		.then((res) => res.json())
 		.then((newCard) => setCard((prevCards) => [newCard, ...prevCards]))
 		.catch(err => console.log("Erro ao criar card ",err))
+		.finally(() => setLoading(false))
 	}
 
 	const handleCardLike = (card) => {
@@ -65,6 +74,7 @@ function App() {
 	}
 
 	const handleCardDelete = (card) => {
+		setLoading(true)
 		api.deleteCard(card._id)
 			.then(() => {
 				setCard((prevCards) => prevCards.filter((c) => c._id !== card._id));
@@ -74,6 +84,8 @@ function App() {
 				console.log("Erro ao deletar card", err)
 				setPopup(null)
 			})
+			.finally(() => setLoading(false))
+		
 	}
 
 	return (
@@ -86,7 +98,8 @@ function App() {
 				onAddPlaceSubmit={handleAddPlaceSubmit}
 				cardState={card} 
 				popupState={popup} 
-				setPopupState={setPopup}/>
+				setPopupState={setPopup}
+				isLoading={isLoading}/>
 				<Footer />
 			</CurrentUserContext.Provider>
 		</div>

@@ -8,72 +8,45 @@ import NewCard from '../NewCard/NewCard.jsx';
 import DeleteCard from '../DeleteCard/DeleteCard.jsx';
 import Card from '../Card/Card.jsx'
 import CurrentUserContext from '../../contexts/CurrentUserContext.js'
-import api from '../../utils/api.js'
-// import { preview } from 'vite';
 
-function Main() {
-  const [popup, setPopup] = useState(null);
-  const [cards, setCards] = useState([]);
+function Main({
+  getCardList,
+  cardState,
+  onCardLike,
+  onCardDelete,
+  popupState,
+  setPopupState,
+  onAddPlaceSubmit
+}) {
 
   const {currentUser} = useContext(CurrentUserContext)
 
   useEffect(() => {
-      api.getInitialCards()
-      .then((res) => res.json())
-      .then((data) => setCards(data))
-      .catch((err) => console.log("Erro ao buscar cards-> ", err))
+      getCardList()
   },[])
 
   const editProfilePopup = { title: 'Editar perfil', children: <EditProfile onClose={handleClosePopup}/> };
   const editAvatarPopup = { title: 'Atualizar a foto do perfil', children: <EditAvatar onClose={handleClosePopup} /> };
-  const newCardPopup = { title: 'Novo local', children: <NewCard /> };
+  const newCardPopup = { title: 'Novo local', children: <NewCard onAddPlaceSubmit={onAddPlaceSubmit} onClose={handleClosePopup}/> };
 
-  const deleteCardPopup = (card) => {
-    setPopup({
+  const deleteCardPopup = (cardState) => {
+    setPopupState({
       title: 'Excluir imagem?',
       children: (
         <DeleteCard
           onClose={handleClosePopup}
-          onConfirm={() => handleDeleteCard(card)}
+          onConfirm={() => onCardDelete(cardState)}
         />
       ),
     });
   };
 
-function handleLike(card) {
-  const likeRequest = card.isLiked ? api.removeLike(card._id) : api.addLike(card._id);
-
-  likeRequest
-    .then((updatedCard) => {
-      setCards((prevCards) =>
-        prevCards.map((c) =>
-          c._id === card._id ? { ...c, ...updatedCard, isLiked: !card.isLiked } : c
-        )
-      );
-    })
-    .catch((err) => {
-      console.error('Erro ao atualizar like:', err);
-    });
-}
-
-  function handleDeleteCard(card) {
-    api.deleteCard(card._id)
-    .then(() => {
-      setCards((prevCards) => prevCards.filter((c) => c._id !== card._id));
-      setPopup(null)
-    })
-    .catch((err) => {
-      console.log("Erro ao deletar card", err)
-      setPopup(null)
-    })
-  }
-
-  function handleOpenPopup(popup) {
-    setPopup(popup);
+  function handleOpenPopup(popupState) {
+    setPopupState(popupState);
   }
 
   function handleClosePopup() {
-    setPopup(null);
+    setPopupState(null);
   }
 
   return (
@@ -95,24 +68,24 @@ function handleLike(card) {
         </div>
       </div>
 
-      {popup && (
+      {popupState && (
         <>
           <div className="popup__overlay" onClick={handleClosePopup}></div>
-          <Popup onClose={handleClosePopup} title={popup.title}>
-            {popup.children}
+          <Popup onClose={handleClosePopup} title={popupState.title}>
+            {popupState.children}
           </Popup>
         </>
       )}
     </section>
       <div className="loading-spinner" id="loadingSpinner"></div>
       <ul className="cards">
-        {cards.map((card) => (
+        {cardState.map((card) => (
           <Card
             key={card._id}
             card={card}
             onDelete={deleteCardPopup}
             handleOpenPopup={handleOpenPopup}
-            onLike={() => handleLike(card)}
+            onLike={() => onCardLike(card)}
           />
         ))}
       </ul>
